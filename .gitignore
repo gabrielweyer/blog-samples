@@ -1,0 +1,12 @@
+# Rider
+
+.idea/
+
+# Build detritus
+
+bin/
+obj/
+
+# Visual Studio
+
+.vs/
