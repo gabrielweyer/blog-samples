@@ -10,3 +10,7 @@ obj/
 # Visual Studio
 
 .vs/
+
+# NuGet
+
+packages/
