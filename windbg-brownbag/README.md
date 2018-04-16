@@ -5,7 +5,7 @@
 **Project**: `src\CrashConsole`
 
 1. Compile using the `Release` `Configuration`
-1. Browse to the output directory (by default `src\CrashConsole\bin\Release\netcoreapp2.0\`)
+1. Browse to the output directory (`src\CrashConsole\bin\Release\net461\`)
 1. `C:\path-to-procdump\procdump.exe -e -ma -x C:\dumps .\CrashConsole.exe`
 1. Copy `.\CrashConsole.pdb` to your `sympath`
 1. Open the dump in `WinDbg Preview`
@@ -22,6 +22,7 @@
 1. The requests hang
 1. `procdump.exe -ma <pid>`
 1. Open the dump in `WinDbg Preview`
+1. `.load C:\path-to-mex\mex.dll`
 1. `!mex.runaway2`
 1. `!mex.mthreads`
 1. `.loadby sos clr`
