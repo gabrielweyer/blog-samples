@@ -1,0 +1,397 @@
+
+Microsoft (R) Windows Debugger Version 10.0.17074.1002 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [E:\dumps\brownbag\crash\CrashConsole.exe_180422_083132.dmp]
+User Mini Dump File with Full Memory: Only application data is available
+
+Comment: '
+*** "E:\tools\sysinternals\procdump.exe" -e -ma -x E:\dumps\brownbag\crash .\CrashConsole.exe
+*** Unhandled exception: E0434352.CLR'
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Version 16299 MP (4 procs) Free x64
+Product: WinNt, suite: SingleUserTS
+16299.15.amd64fre.rs3_release.170928-1534
+Machine Name:
+Debug session time: Sun Apr 22 08:31:32.000 2018 (UTC + 10:00)
+System Uptime: 10 days 10:25:48.309
+Process Uptime: 0 days 0:00:01.000
+.............................
+Loading unloaded module list
+.
+This dump file has an exception of interest stored in it.
+The stored exception information can be accessed via .ecxr.
+(1004.21a4): CLR exception - code e0434352 (first/second chance not available)
+KERNELBASE!RaiseException+0x68:
+00007fff`62244008 488b8c24c0000000 mov     rcx,qword ptr [rsp+0C0h] ss:00000045`1a8fc970=0000594580633936
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             E:\symbols\source
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             E:\symbols\local
+Deferred                                       srv*E:\symbols\microsoft*https://msdl.microsoft.com/download/symbols
+0:000> !analyze -v
+*******************************************************************************
+*                                                                             *
+*                        Exception Analysis                                   *
+*                                                                             *
+*******************************************************************************
+
+*** WARNING: Unable to verify checksum for CrashConsole.exe
+DEBUG_FLR_EXCEPTION_CODE(80131500) and the ".exr -1" ExceptionCode(e0434352) don't match
+MethodDesc:   00007ffef3dd59b0
+Method Name:  CrashConsole.Program.Main(System.String[])
+Class:        00007ffef3dd24a0
+MethodTable:  00007ffef3dd59c8
+mdToken:      0000000006000003
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0480
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\Program.cs @ 11
+MethodDesc:   00007ffef3dd5a60
+Method Name:  CrashConsole.HugeAndComplexService.DoSomeImportantWork()
+Class:        00007ffef3f21020
+MethodTable:  00007ffef3dd5a78
+mdToken:      0000000006000001
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0510
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\HugeAndComplexService.cs @ 9
+MethodDesc:   00007ffef3dd59b0
+Method Name:  CrashConsole.Program.Main(System.String[])
+Class:        00007ffef3dd24a0
+MethodTable:  00007ffef3dd59c8
+mdToken:      0000000006000003
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0480
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\Program.cs @ 11
+MethodDesc:   00007ffef3dd59b0
+Method Name:  CrashConsole.Program.Main(System.String[])
+Class:        00007ffef3dd24a0
+MethodTable:  00007ffef3dd59c8
+mdToken:      0000000006000003
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0480
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\Program.cs @ 11
+MethodDesc:   00007ffef3dd5a60
+Method Name:  CrashConsole.HugeAndComplexService.DoSomeImportantWork()
+Class:        00007ffef3f21020
+MethodTable:  00007ffef3dd5a78
+mdToken:      0000000006000001
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0510
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\HugeAndComplexService.cs @ 9
+MethodDesc:   00007ffef3dd59b0
+Method Name:  CrashConsole.Program.Main(System.String[])
+Class:        00007ffef3dd24a0
+MethodTable:  00007ffef3dd59c8
+mdToken:      0000000006000003
+Module:       00007ffef3dd4110
+IsJitted:     yes
+CodeAddr:     00007ffef3ee0480
+Transparency: Critical
+Source file:  E:\code\me\blog-samples\windbg-brownbag\src\CrashConsole\Program.cs @ 11
+GetUrlPageData2 (WinHttp) failed: 12002.
+
+KEY_VALUES_STRING: 1
+
+    Key  : CLR.System.Exception._message
+    Value: YOLO - LMAO
+
+    Key  : CLR.System.InvalidOperationException._message
+    Value: Meaningful troubleshooting information
+
+
+TIMELINE_ANALYSIS: 1
+
+Timeline: !analyze.Start
+    Name: <blank>
+    Time: 2018-04-21T22:32:23.193Z
+    Diff: 51193 mSec
+
+Timeline: Dump.Current
+    Name: <blank>
+    Time: 2018-04-21T22:31:32.0Z
+    Diff: 0 mSec
+
+Timeline: Process.Start
+    Name: <blank>
+    Time: 2018-04-21T22:31:31.0Z
+    Diff: 1000 mSec
+
+Timeline: OS.Boot
+    Name: <blank>
+    Time: 2018-04-11T12:05:44.0Z
+    Diff: 901548000 mSec
+
+
+DUMP_CLASS: 2
+
+DUMP_QUALIFIER: 400
+
+CONTEXT:  0000000100000000 -- (.cxr 0x100000000)
+Unable to read context, HRESULT 0x80004002
+
+FAULTING_IP: 
+KERNELBASE!RaiseException+68
+00007fff`62244008 488b8c24c0000000 mov     rcx,qword ptr [rsp+0C0h]
+
+EXCEPTION_RECORD:  0000014d00000101 -- (.exr 0x14d00000101)
+Cannot read Exception record @ 0000014d00000101
+
+PROCESS_NAME:  CrashConsole.exe
+
+EXCEPTION_CODE: (HRESULT) 0x80131500 (2148734208) - <Unable to get error code text>
+
+EXCEPTION_CODE_STR:  80131500
+
+WATSON_BKT_PROCSTAMP:  b384be59
+
+WATSON_BKT_PROCVER:  1.0.0.0
+
+PROCESS_VER_PRODUCT:  CrashConsole
+
+WATSON_BKT_MODULE:  KERNELBASE.dll
+
+WATSON_BKT_MODSTAMP:  6369e29f
+
+WATSON_BKT_MODOFFSET:  14008
+
+WATSON_BKT_MODVER:  6.2.16299.371
+
+MODULE_VER_PRODUCT:  Microsoft® Windows® Operating System
+
+BUILD_VERSION_STRING:  10.0.16299.15 (WinBuild.160101.0800)
+
+MODLIST_WITH_TSCHKSUM_HASH:  37d72e6708c5c4e9580897ad3d077e7a3eb1cbb6
+
+MODLIST_SHA1_HASH:  4e6fb80ba55b8579524a7ef5f0355dcdf43d7853
+
+COMMENT:  
+*** "E:\tools\sysinternals\procdump.exe" -e -ma -x E:\dumps\brownbag\crash .\CrashConsole.exe
+*** Unhandled exception: E0434352.CLR
+
+NTGLOBALFLAG:  70
+
+PROCESS_BAM_CURRENT_THROTTLED: 0
+
+PROCESS_BAM_PREVIOUS_THROTTLED: 0
+
+APPLICATION_VERIFIER_FLAGS:  0
+
+PRODUCT_TYPE:  1
+
+SUITE_MASK:  272
+
+DUMP_FLAGS:  8000c07
+
+DUMP_TYPE:  3
+
+MISSING_CLR_SYMBOL: 0
+
+ANALYSIS_SESSION_HOST:  GABRIEL-DESKTOP
+
+ANALYSIS_SESSION_TIME:  04-22-2018 08:32:23.0193
+
+ANALYSIS_VERSION: 10.0.17074.1002 amd64fre
+
+MANAGED_CODE: 1
+
+MANAGED_ENGINE_MODULE:  clr
+
+MANAGED_ANALYSIS_PROVIDER:  SOS
+
+MANAGED_THREAD_ID: 21a4
+
+MANAGED_EXCEPTION_ADDRESS: 14d1b652ff8
+
+MANAGED_EXCEPTION_NESTED_ADDRESS: 14d1b652df8
+
+LAST_CONTROL_TRANSFER:  from 00007fff53589e3a to 00007fff62244008
+
+THREAD_ATTRIBUTES: 
+FAULTING_THREAD:  ffffffff
+
+THREAD_SHA1_HASH_MOD_FUNC:  57bb56d986a1660475b1f7349a75f0ae1ba9356b
+
+THREAD_SHA1_HASH_MOD_FUNC_OFFSET:  c18a28de9e426a23dabac3991f2e4fde68c9526c
+
+OS_LOCALE:  ENA
+
+PROBLEM_CLASSES: 
+
+    ID:     [0n249]
+    Type:   [CLR_EXCEPTION]
+    Class:  Primary
+    Scope:  DEFAULT_BUCKET_ID (Failure Bucket ID prefix)
+            BUCKET_ID
+    Name:   Add
+    Data:   Omit
+    PID:    [Unspecified]
+    TID:    [0x21a4]
+    Frame:  [0] : KERNELBASE!RaiseException
+
+    ID:     [0n247]
+    Type:   [@ManagedObjectName]
+    Class:  Addendum
+    Scope:  DEFAULT_BUCKET_ID (Failure Bucket ID prefix)
+            BUCKET_ID
+    Name:   Omit
+    Data:   Add
+            String: [System.Exception]
+    PID:    [0x1004]
+    TID:    [Unspecified]
+    Frame:  [0]
+
+BUGCHECK_STR:  CLR_EXCEPTION_System.Exception
+
+DEFAULT_BUCKET_ID:  CLR_EXCEPTION_System.Exception
+
+PRIMARY_PROBLEM_CLASS:  CLR_EXCEPTION
+
+STACK_TEXT:  
+00000045`1a8fcc40 00007ffe`f3ee04e1 CrashConsole!CrashConsole.Program.Main+0x61
+
+
+THREAD_SHA1_HASH_MOD:  2751fb067a9ed992e043d8b90204771246db1e2c
+
+FOLLOWUP_IP: 
++0
+00007ffe`f3ee04e1 cc              int     3
+
+FAULT_INSTR_CODE:  190000cc
+
+SYMBOL_STACK_INDEX:  0
+
+SYMBOL_NAME:  CrashConsole!CrashConsole.Program.Main+61
+
+FOLLOWUP_NAME:  MachineOwner
+
+MODULE_NAME: CrashConsole
+
+IMAGE_NAME:  CrashConsole.exe
+
+DEBUG_FLR_IMAGE_TIMESTAMP:  0
+
+STACK_COMMAND:  !sos.pe 0x14d1b652ff8 ; ** Pseudo Context ** ManagedPseudo ** Value: 1ee301fa430 ** ; kb
+
+BUCKET_ID:  CLR_EXCEPTION_System.Exception_CrashConsole!CrashConsole.Program.Main+61
+
+FAILURE_EXCEPTION_CODE:  80131500
+
+FAILURE_IMAGE_NAME:  CrashConsole.exe
+
+BUCKET_ID_IMAGE_STR:  CrashConsole.exe
+
+FAILURE_MODULE_NAME:  CrashConsole
+
+BUCKET_ID_MODULE_STR:  CrashConsole
+
+FAILURE_FUNCTION_NAME:  CrashConsole.Program.Main
+
+BUCKET_ID_FUNCTION_STR:  CrashConsole.Program.Main
+
+BUCKET_ID_OFFSET:  61
+
+BUCKET_ID_MODTIMEDATESTAMP:  0
+
+BUCKET_ID_MODCHECKSUM:  0
+
+BUCKET_ID_MODVER_STR:  1.0.0.0
+
+BUCKET_ID_PREFIX_STR:  CLR_EXCEPTION_System.Exception_
+
+FAILURE_PROBLEM_CLASS:  CLR_EXCEPTION
+
+FAILURE_SYMBOL_NAME:  CrashConsole.exe!CrashConsole.Program.Main
+
+FAILURE_BUCKET_ID:  CLR_EXCEPTION_System.Exception_80131500_CrashConsole.exe!CrashConsole.Program.Main
+
+WATSON_STAGEONE_URL:  http://watson.microsoft.com/StageOne/CrashConsole.exe/1.0.0.0/b384be59/KERNELBASE.dll/6.2.16299.371/6369e29f/80131500/00014008.htm?Retriage=1
+
+TARGET_TIME:  2018-04-21T22:31:32.000Z
+
+OSBUILD:  16299
+
+OSSERVICEPACK:  15
+
+SERVICEPACK_NUMBER: 0
+
+OS_REVISION: 0
+
+OSPLATFORM_TYPE:  x64
+
+OSNAME:  Windows 10
+
+OSEDITION:  Windows 10 WinNt SingleUserTS
+
+USER_LCID:  0
+
+OSBUILD_TIMESTAMP:  1976-06-22 16:45:20
+
+BUILDDATESTAMP_STR:  160101.0800
+
+BUILDLAB_STR:  WinBuild
+
+BUILDOSVER_STR:  10.0.16299.15
+
+ANALYSIS_SESSION_ELAPSED_TIME:  75de
+
+ANALYSIS_SOURCE:  UM
+
+FAILURE_ID_HASH_STRING:  um:clr_exception_system.exception_80131500_crashconsole.exe!crashconsole.program.main
+
+FAILURE_ID_HASH:  {a83a6506-844a-02e7-d08c-1d446e1d596b}
+
+Followup:     MachineOwner
+---------
+
+0:000> !pe 14d1b652ff8
+Exception object: 0000014d1b652ff8
+Exception type:   System.Exception
+Message:          YOLO - LMAO
+InnerException:   <none>
+StackTrace (generated):
+    SP               IP               Function
+    000000451A8FCC40 00007FFEF3EE04E1 CrashConsole!CrashConsole.Program.Main(System.String[])+0x61
+
+StackTraceString: <none>
+HResult: 80131500
+There are nested exceptions on this thread. Run with -nested for details
+0:000> !pe -nested 14d1b652ff8
+Exception object: 0000014d1b652ff8
+Exception type:   System.Exception
+Message:          YOLO - LMAO
+InnerException:   <none>
+StackTrace (generated):
+    SP               IP               Function
+    000000451A8FCC40 00007FFEF3EE04E1 CrashConsole!CrashConsole.Program.Main(System.String[])+0x61
+
+StackTraceString: <none>
+HResult: 80131500
+
+Nested exception -------------------------------------------------------------
+Exception object: 0000014d1b652df8
+Exception type:   System.InvalidOperationException
+Message:          Meaningful troubleshooting information
+InnerException:   <none>
+StackTrace (generated):
+    SP               IP               Function
+    000000451A8FEDE0 00007FFEF3EE054E CrashConsole!CrashConsole.HugeAndComplexService.DoSomeImportantWork()+0x3e
+    000000451A8FEE10 00007FFEF3EE0494 CrashConsole!CrashConsole.Program.Main(System.String[])+0x14
+
+StackTraceString: <none>
+HResult: 80131509

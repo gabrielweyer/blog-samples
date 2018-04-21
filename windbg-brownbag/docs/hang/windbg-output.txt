@@ -1,0 +1,402 @@
+
+Microsoft (R) Windows Debugger Version 10.0.17074.1002 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [E:\dumps\brownbag\hang\iisexpress.exe_180422_092250.dmp]
+User Mini Dump File with Full Memory: Only application data is available
+
+Comment: '
+*** "E:\tools\sysinternals\procdump.exe" -ma 39496
+*** Manual dump'
+Symbol search path is: srv*
+Executable search path is: 
+Windows 10 Version 16299 MP (4 procs) Free x64
+Product: WinNt, suite: SingleUserTS
+16299.15.amd64fre.rs3_release.170928-1534
+Machine Name:
+Debug session time: Sun Apr 22 09:22:50.000 2018 (UTC + 10:00)
+System Uptime: 10 days 11:17:07.542
+Process Uptime: 0 days 0:01:56.000
+................................................................
+................................................................
+................................................................
+........
+ntdll!NtWaitForMultipleObjects+0x14:
+00007fff`65290e14 c3              ret
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             E:\symbols\source
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             E:\symbols\local
+Deferred                                       srv*E:\symbols\microsoft*https://msdl.microsoft.com/download/symbols
+0:000> .load E:\symbols\winext\x64\mex.dll
+Mex External 3.0.0.7172 Loaded!
+0:000> !mex.runaway2
+Showing top 10 threads
+Thread ID   User Time
+==============================
+        6 | 0 days 0:00:00.515
+       29 | 0 days 0:00:00.093
+        0 | 0 days 0:00:00.062
+       11 | 0 days 0:00:00.000
+        9 | 0 days 0:00:00.000
+       10 | 0 days 0:00:00.000
+       14 | 0 days 0:00:00.000
+       15 | 0 days 0:00:00.000
+       12 | 0 days 0:00:00.000
+       13 | 0 days 0:00:00.000
+==============================
+Thread ID   User Time
+0:000> !mex.mthreads
+        DbgId ThreadId Apartment Kind       GC Mode    GC Suspending? Action
+======= ===== ======== ========= ========== ========== ============== ==================================================================================================
+(t) (s)     6     a16c MTA       Background Preemptive no             (idle)
+(t) (s)    24     bed4 MTA       Finalizer  Preemptive no             
+(t) (s)    26     a4f8 MTA       Timer      Preemptive no             (idle)
+(t) (s)    27     d990           Background Preemptive no             
+(t) (s)    28     d3e4           Worker     Preemptive no             (idle)
+(t) (s)    29     b0cc MTA       Worker     Preemptive no             MonitorWait: System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)
+(t) (s)    30     a268 MTA       Worker     Preemptive no             MonitorWait: System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)
+(t) (s)    31     df74 MTA       Worker     Preemptive no             MonitorWait: System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)
+(t) (s)    32     d9ec MTA       Worker     Preemptive no             MonitorWait: System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)
+(t) (s)    33     dbbc MTA       Worker     Preemptive no             (idle)
+0:033> .loadby sos clr
+0:033> !sos.SyncBlk
+c0000005 Exception in C:\Windows\Microsoft.NET\Framework64\v4.0.30319\sos.SyncBlk debugger extension.
+      PC: 00007ffe`d7c17c11  VA: 00000000`00000000  R/W: 0  Parameter: 00000000`00000000
+0:033> !sos.SyncBlk
+Index SyncBlock MonitorHeld Recursion Owning Thread Info  SyncBlock Owner
+-----------------------------
+Total           72
+CCW             5
+RCW             15
+ComClassFactory 0
+Free            0
+0:033> !mex.aspxpagesext
+   Address          Completed Timeout Time (secs) ThreadId ReturnCode Verb Url
+   00000138192eef10        no     110          75       30        200 GET  /hang
+   00000138192f03c8        no     110          88       31        200 GET  /hang
+   0000013919330988        no     110          80       32        200 GET  /hang
+   0000013a19312a30        no     110         103       29        200 GET  /hang
+AS 0000013b19284df0        no       0         103                 200      /
+5 contexts found (5 displayed).
+   AS == possibly async request
+   SL == session locked
+0:033> !mex.us
+1 thread [stats]: 0
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff6228abbe KERNELBASE!WaitForMultipleObjects+0xe
+    00007ff6f3cb1a6a iisexpress+0x1a6a
+    00007ff6f3cb72dd iisexpress+0x72dd
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 2
+    00007fff652903e4 ntdll!NtRemoveIoCompletion+0x14
+    00007fff6228d6de KERNELBASE!GetQueuedCompletionStatus+0x4e
+    00007fff22c3a217 nativrd2!GetDefaultNativeConfigurationSystem+0x90e7
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 8
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff6228abbe KERNELBASE!WaitForMultipleObjects+0xe
+    00007fff22fca5f6 iisfreb!RegisterModule+0x8aa6
+    00007fff22fc85dd iisfreb!RegisterModule+0x6a8d
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 13
+    00007fff652903e4 ntdll!NtRemoveIoCompletion+0x14
+    00007fff6228d6de KERNELBASE!GetQueuedCompletionStatus+0x4e
+    00007fff22b83328 iisfcgi+0x3328
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 15
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14                
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106          
+    00007fff62d5aa73 combase!WaitCoalesced+0xb3                         (onecore\com\published\comutils\coalescedwait.cxx @ 72)
+    00007fff62d5ce00 combase!CROIDTable::WorkerThreadLoop+0x50          (onecore\com\combase\dcomrem\refcache.cxx @ 1642)
+    00007fff62d5a931 combase!CRpcThread::WorkerLoop+0x15d               (onecore\com\combase\dcomrem\threads.cxx @ 269)
+    00007fff62d9157c combase!CRpcThreadCache::RpcWorkerThreadEntry+0x7c (onecore\com\combase\dcomrem\threads.cxx @ 76)
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14                  
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21                      
+
+1 thread [stats]: 16
+    00007fff652903a4 ntdll!NtDeviceIoControlFile+0x14
+    00007fff6225ebcd KERNELBASE!ConsoleCallServerGeneric+0x10d
+    00007fff6225e969 KERNELBASE!GetConsoleInput+0xc9
+    00007fff622af455 KERNELBASE!ReadConsoleInputW+0x15
+    00007fff649ec8a5 msvcrt!getwch_nolock+0xa9
+    00007fff649ec7e6 msvcrt!getwch+0x16
+    00007ff6f3cb128e iisexpress+0x128e
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 17
+    00007fff624a1144 win32u!NtUserGetMessage+0x14
+    00007fff626e3f76 user32!GetMessageW+0x26
+    00007ff6f3cb120a iisexpress+0x120a
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 18
+    00007fff652903e4 ntdll!NtRemoveIoCompletion+0x14
+    00007fff6228d6de KERNELBASE!GetQueuedCompletionStatus+0x4e
+    00007fff5358dd5c clr!ThreadpoolMgr::CompletionPortThreadStart+0x210
+    00007fff5358dfff clr!ThreadpoolMgr::intermediateThreadProc+0x86
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 19
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff53642482 clr!DebuggerRCThread::MainLoop+0xce
+    00007fff536423ad clr!DebuggerRCThread::ThreadProc+0xd2
+    00007fff536422c0 clr!DebuggerRCThread::ThreadProcStatic+0x41
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 20
+    00007fff65290344 ntdll!NtWaitForSingleObject+0x14
+    00007fff62243b7f KERNELBASE!WaitForSingleObjectEx+0x9f
+    00007fff536a3117 clr!CLREventWaitHelper2+0x3c
+    00007fff536a30cf clr!CLREventWaitHelper+0x1f
+    00007fff536a3040 clr!CLREventBase::WaitEx+0x7c
+    00007fff53695b94 clr!SVR::gc_heap::gc_thread_function+0x1a7
+    00007fff53670617 clr!SVR::gc_heap::gc_thread_stub+0x7e
+    00007fff536726d4 clr!GCThreadStub+0x24
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 24
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff5354932e clr!FinalizerThread::WaitForFinalizerEvent+0xb6
+    00007fff53549c64 clr!FinalizerThread::FinalizerThreadWorker+0x54
+    00007fff534e65b1 clr!ManagedThreadBase_DispatchInner+0x39
+    00007fff534e652c clr!ManagedThreadBase_DispatchMiddle+0x6c
+    00007fff534e646a clr!ManagedThreadBase_DispatchOuter+0x75
+    00007fff53631f1a clr!FinalizerThread::FinalizerThreadStart+0x10a
+    00007fff5350945f clr!Thread::intermediateThreadProc+0x86
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 25
+    00007fff65290344 ntdll!NtWaitForSingleObject+0x14
+    00007fff62243b7f KERNELBASE!WaitForSingleObjectEx+0x9f
+    00007fff536717f8 clr!ProfilingAPIAttachDetach::OverlappedResultHolder::Wait+0x28
+    00007fff536717be clr!ProfilingAPIAttachServer::ConnectToClient+0x76
+    00007fff53671728 clr!ProfilingAPIAttachDetach::ProfilingAPIAttachThreadMain+0x74
+    00007fff5367169f clr!ProfilingAPIAttachDetach::ProfilingAPIAttachThreadStart+0x3f
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 26
+    00007fff65290944 ntdll!NtDelayExecution+0x14
+    00007fff6228912a KERNELBASE!SleepEx+0x9a
+    00007fff534e8dad clr!ThreadpoolMgr::TimerThreadFire+0x49
+    00007fff534e8d5f clr!ThreadpoolMgr::TimerThreadStart+0x6f
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 27
+    00007fff65290344 ntdll!NtWaitForSingleObject+0x14
+    00007fff62243b7f KERNELBASE!WaitForSingleObjectEx+0x9f
+    00007fff536a3117 clr!CLREventWaitHelper2+0x3c
+    00007fff536a30cf clr!CLREventWaitHelper+0x1f
+    00007fff536a3040 clr!CLREventBase::WaitEx+0x7c
+    00007fff53626d1c clr!AppDomain::ADUnloadThreadStart+0x18c
+    00007fff5350945f clr!Thread::intermediateThreadProc+0x86
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 28
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff5355fa84 clr!ThreadpoolMgr::WaitThreadStart+0xdd
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+1 thread [stats]: 33
+    00007fff65290344 ntdll!NtWaitForSingleObject+0x14
+    00007fff62243b7f KERNELBASE!WaitForSingleObjectEx+0x9f
+    00007fff534e7a26 clr!CLRSemaphore::Wait+0x8a
+    00007fff534e7b96 clr!ThreadpoolMgr::UnfairSemaphore::Wait+0xf1
+    00007fff534e7b31 clr!ThreadpoolMgr::WorkerThreadStart+0x2d1
+    00007fff5350945f clr!Thread::intermediateThreadProc+0x86
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+3 threads [stats]: 1 7 14
+    00007fff65293bd4 ntdll!NtWaitForWorkViaWorkerFactory+0x14
+    00007fff65224a7d ntdll!TppWorkerThread+0x71d
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+3 threads [stats]: 21 22 23
+    00007fff65290344 ntdll!NtWaitForSingleObject+0x14
+    00007fff62243b7f KERNELBASE!WaitForSingleObjectEx+0x9f
+    00007fff536a3117 clr!CLREventWaitHelper2+0x3c
+    00007fff536a30cf clr!CLREventWaitHelper+0x1f
+    00007fff536a3040 clr!CLREventBase::WaitEx+0x7c
+    00007fff53695b03 clr!SVR::gc_heap::gc_thread_function+0x63
+    00007fff53670617 clr!SVR::gc_heap::gc_thread_stub+0x7e
+    00007fff536726d4 clr!GCThreadStub+0x24
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+4 threads [stats]: 9 10 11 12
+    00007fff652903e4 ntdll!NtRemoveIoCompletion+0x14
+    00007fff6228d6de KERNELBASE!GetQueuedCompletionStatus+0x4e
+    00007fff22b8175b iisfcgi+0x175b
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+4 threads [stats]: 29 30 31 32
+    00007fff65290e14 ntdll!NtWaitForMultipleObjects+0x14
+    00007fff6228acd6 KERNELBASE!WaitForMultipleObjectsEx+0x106
+    00007fff536a28de clr!WaitForMultipleObjectsEx_SO_TOLERANT+0x62
+    00007fff536a2774 clr!Thread::DoAppropriateWaitWorker+0x1e4
+    00007fff536a256d clr!Thread::DoAppropriateWait+0x7d
+    00007fff536a31f2 clr!CLREventBase::WaitEx+0xc8
+    00007fff5368791f clr!Thread::Block+0x27
+    00007fff536878ec clr!SyncBlock::Wait+0x19d
+    00007fff53687691 clr!ObjectNative::WaitTimeout+0xe1
+    00007fff501f3ec3 mscorlib_ni!System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)$##6003DCC+0x2e3
+    00007fff501ecbf6 mscorlib_ni!System.Threading.Tasks.Task.SpinThenBlockingWait(Int32, System.Threading.CancellationToken)$##6003F81+0xb6
+    00007fff50b8a8f1 mscorlib_ni!System.Threading.Tasks.Task.InternalWait(Int32, System.Threading.CancellationToken)$##6003F80+0x1a1
+    00007fff50fbe592 mscorlib_ni![COLD] System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(System.Threading.Tasks.Task)$##6005CBF+0x16
+    00007ffef43ed3a9 0x7ffef43ed3a9
+    00007ffef4590227 0x7ffef4590227
+    00007ffef43ed265 0x7ffef43ed265
+    00007ffef43ec9f8 0x7ffef43ec9f8
+    00007ffef43ec47a 0x7ffef43ec47a
+    00007ffef43ec376 0x7ffef43ec376
+    00007ffef43ec2be 0x7ffef43ec2be
+    00007ffef43ec1e5 0x7ffef43ec1e5
+    00007ffef43ebcd7 0x7ffef43ebcd7
+    00007ffef43ebae6 0x7ffef43ebae6
+    00007ffef43eba2b 0x7ffef43eba2b
+    00007ffef43e7b41 0x7ffef43e7b41
+    00007ffef43e580b 0x7ffef43e580b
+    00007ffef43e55a6 0x7ffef43e55a6
+    00007ffef43e54f3 0x7ffef43e54f3
+    00007fff1effcaf5 System_Net_Http_ni!System.Net.Http.HttpMessageInvoker.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)$##60000C0+0x45
+    00007ffef43e4ec6 0x7ffef43e4ec6
+    00007fff1effcdb5 System_Net_Http_ni!System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)$##60000B0+0x35
+    00007ffef43e4052 0x7ffef43e4052
+    00007ffef43e3e46 0x7ffef43e3e46
+    00007ffef43e3d93 0x7ffef43e3d93
+    00007fff1effcaf5 System_Net_Http_ni!System.Net.Http.HttpMessageInvoker.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)$##60000C0+0x45
+    00007ffef43e34cb 0x7ffef43e34cb
+    00007ffef43e335c 0x7ffef43e335c
+    00007ffef43e32ae 0x7ffef43e32ae
+    00007fff3e9b1f23 System_Web_ni!System.Web.TaskAsyncHelper.BeginTask(System.Func`1<System.Threading.Tasks.Task>, System.AsyncCallback, System.Object)$##600058B+0x33
+    00007fff3e2a04cc System_Web_ni!System.Web.HttpApplication+CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()$##60067CD+0x12c
+    00007fff3e970973 System_Web_ni!System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep)$##600077F+0xc3
+    00007fff3e2650b0 System_Web_ni!System.Web.HttpApplication.ExecuteStep(IExecutionStep, Boolean ByRef)$##6000780+0x80
+    00007fff3e278114 System_Web_ni!System.Web.HttpApplication+PipelineStepManager.ResumeSteps(System.Exception)$##60067EE+0x5c4
+    00007fff3e265b49 System_Web_ni!System.Web.HttpApplication.BeginProcessRequestNotification(System.Web.HttpContext, System.AsyncCallback)$##6000795+0x79
+    00007fff3e2766ba System_Web_ni!System.Web.HttpRuntime.ProcessRequestNotificationPrivate(System.Web.Hosting.IIS7WorkerRequest, System.Web.HttpContext)$##6000C1E+0xda
+    00007fff3e266ccf System_Web_ni!System.Web.Hosting.PipelineRuntime.ProcessRequestNotificationHelper(IntPtr, IntPtr, IntPtr, Int32)$##600636C+0x3df
+    00007fff3e2668c3 System_Web_ni!System.Web.Hosting.PipelineRuntime.ProcessRequestNotification(IntPtr, IntPtr, IntPtr, Int32)$##600636B+0x13
+    00007fff3e964502 System_Web_ni!DomainBoundILStubClass.IL_STUB_ReversePInvoke(Int64, Int64, Int64, Int32)$##6000000+0x52
+    00007fff534e222e clr!UMThunkStub+0x6e
+    00007fff59ad184f webengine4!W3_MGD_HANDLER::ProcessNotification+0x8e
+    00007fff59ae1432 webengine4!W3_MGD_HANDLER::DoWork+0x3a5
+    00007fff59ad160b webengine4!RequestDoWork+0x3fc
+    00007fff59b33fa1 webengine4!CMgdEngHttpModule::OnExecuteRequestHandler+0x21
+    00007fff23112369 iiscore+0x22369
+    00007fff231113f7 iiscore+0x213f7
+    00007fff230fea14 iiscore+0xea14
+    00007fff23112dbd iiscore+0x22dbd
+    00007fff23103789 iiscore+0x13789
+    00007fff23102a2b iiscore+0x12a2b
+    00007fff59b2fb01 webengine4!W3_MGD_HANDLER::IndicateCompletion+0x5d
+    00007fff59b325e2 webengine4!MgdIndicateCompletion+0x22
+    00007fff3e2cdeee System_Web_ni!DomainBoundILStubClass.IL_STUB_PInvoke(IntPtr, System.Web.RequestNotificationStatus ByRef)$##6000000+0x7e
+    00007fff3e266ea0 System_Web_ni!System.Web.Hosting.PipelineRuntime.ProcessRequestNotificationHelper(IntPtr, IntPtr, IntPtr, Int32)$##600636C+0x5b0
+    00007fff3e2668c3 System_Web_ni!System.Web.Hosting.PipelineRuntime.ProcessRequestNotification(IntPtr, IntPtr, IntPtr, Int32)$##600636B+0x13
+    00007fff3e964502 System_Web_ni!DomainBoundILStubClass.IL_STUB_ReversePInvoke(Int64, Int64, Int64, Int32)$##6000000+0x52
+    00007fff534e2483 clr!UM2MThunk_WrapperHelper+0x43
+    00007fff53572bca clr!UM2MThunk_Wrapper+0x60
+    00007fff534ea768 clr!Thread::DoADCallBack+0x13d
+    00007fff53572c75 clr!UM2MDoADCallBack+0xb3
+    00007fff534e242d clr!UMThunkStub+0x26d
+    00007fff59ad184f webengine4!W3_MGD_HANDLER::ProcessNotification+0x8e
+    00007fff59ad17a2 webengine4!ProcessNotificationCallback+0x42
+    00007fff534e86ef clr!UnManagedPerAppDomainTPCount::DispatchWorkItem+0x1bc
+    00007fff534e74a8 clr!ThreadpoolMgr::ExecuteWorkRequest+0x64
+    00007fff534e7385 clr!ThreadpoolMgr::WorkerThreadStart+0xf5
+    00007fff5350945f clr!Thread::intermediateThreadProc+0x86
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+4 threads [stats]: 3 4 5 6
+    00007fff652903e4 ntdll!NtRemoveIoCompletion+0x14
+    00007fff6228d6de KERNELBASE!GetQueuedCompletionStatus+0x4e
+    00007fff56fe2b46 w3tp!THREAD_POOL::PostCompletion+0x86
+    00007fff56fe1819 w3tp+0x1819
+    00007fff62b91fe4 kernel32!BaseThreadInitThunk+0x14
+    00007fff6525f061 ntdll!RtlUserThreadStart+0x21
+
+21 stack(s) with 34 threads displayed (34 Total threads)
+0:033> ~29e !CLRStack
+OS Thread Id: 0xb0cc (29)
+        Child SP               IP Call Site
+0000001b9febcf08 00007fff65290e14 [GCFrame: 0000001b9febcf08] 
+0000001b9febcfd8 00007fff65290e14 [HelperMethodFrame_1OBJ: 0000001b9febcfd8] System.Threading.Monitor.ObjWait(Boolean, Int32, System.Object)
+0000001b9febd0f0 00007fff501f3ec3 System.Threading.ManualResetEventSlim.Wait(Int32, System.Threading.CancellationToken)
+0000001b9febd180 00007fff501ecbf6 System.Threading.Tasks.Task.SpinThenBlockingWait(Int32, System.Threading.CancellationToken)
+0000001b9febd1f0 00007fff50b8a8f1 System.Threading.Tasks.Task.InternalWait(Int32, System.Threading.CancellationToken)
+0000001b9febd2c0 00007fff50fbe592 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(System.Threading.Tasks.Task)
+0000001b9febd2f0 00007ffef43ed3a9 HangApi.Controllers.HangController.Get()
+0000001b9febd330 00007ffef4590227 DynamicClass.lambda_method(System.Runtime.CompilerServices.Closure, System.Object, System.Object[])
+0000001b9febd360 00007ffef43ed265 System.Web.Http.Controllers.ReflectedHttpActionDescriptor+ActionExecutor+c__DisplayClass6_1.b__3(System.Object, System.Object[])
+0000001b9febd3a0 00007ffef43ec9f8 System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext, System.Collections.Generic.IDictionary`2<System.String,System.Object>, System.Threading.CancellationToken)
+0000001b9febd400 00007ffef43ec47a System.Web.Http.Controllers.ApiControllerActionInvoker+d__1.MoveNext()
+0000001b9febd470 00007ffef43ec376 System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.__Canon, mscorlib]].Start[[System.Web.Http.Controllers.ApiControllerActionInvoker+d__1, System.Web.Http]](d__1 ByRef)
+0000001b9febd520 00007ffef43ec2be System.Web.Http.Controllers.ApiControllerActionInvoker.InvokeActionAsyncCore(System.Web.Http.Controllers.HttpActionContext, System.Threading.CancellationToken)
+0000001b9febd5d0 00007ffef43ec1e5 System.Web.Http.Controllers.ApiControllerActionInvoker.InvokeActionAsync(System.Web.Http.Controllers.HttpActionContext, System.Threading.CancellationToken)
+0000001b9febd600 00007ffef43ebcd7 System.Web.Http.Controllers.ActionFilterResult+d__5.MoveNext()
+0000001b9febd690 00007ffef43ebae6 System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.__Canon, mscorlib]].Start[[System.Web.Http.Controllers.ActionFilterResult+d__5, System.Web.Http]](d__5 ByRef)
+0000001b9febd740 00007ffef43eba2b System.Web.Http.Controllers.ActionFilterResult.ExecuteAsync(System.Threading.CancellationToken)
+0000001b9febd7f0 00007ffef43e7b41 System.Web.Http.ApiController.ExecuteAsync(System.Web.Http.Controllers.HttpControllerContext, System.Threading.CancellationToken)
+0000001b9febd870 00007ffef43e580b System.Web.Http.Dispatcher.HttpControllerDispatcher+d__15.MoveNext()
+0000001b9febd8e0 00007ffef43e55a6 System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.__Canon, mscorlib]].Start[[System.Web.Http.Dispatcher.HttpControllerDispatcher+d__15, System.Web.Http]](d__15 ByRef)
+0000001b9febd990 00007ffef43e54f3 System.Web.Http.Dispatcher.HttpControllerDispatcher.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febda40 00007fff1effcaf5 System.Net.Http.HttpMessageInvoker.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febda90 00007ffef43e4ec6 System.Web.Http.Dispatcher.HttpRoutingDispatcher.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febdae0 00007fff1effcdb5 System.Net.Http.DelegatingHandler.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febdb20 00007ffef43e4052 System.Web.Http.HttpServer+d__24.MoveNext()
+0000001b9febdba0 00007ffef43e3e46 System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1[[System.__Canon, mscorlib]].Start[[System.Web.Http.HttpServer+d__24, System.Web.Http]](d__24 ByRef)
+0000001b9febdc50 00007ffef43e3d93 System.Web.Http.HttpServer.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febdd00 00007fff1effcaf5 System.Net.Http.HttpMessageInvoker.SendAsync(System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken)
+0000001b9febdd50 00007ffef43e34cb System.Web.Http.WebHost.HttpControllerHandler+d__12.MoveNext()
+0000001b9febddd0 00007ffef43e335c System.Runtime.CompilerServices.AsyncTaskMethodBuilder.Start[[System.Web.Http.WebHost.HttpControllerHandler+d__12, System.Web.Http.WebHost]](d__12 ByRef)
+0000001b9febde80 00007ffef43e32ae System.Web.Http.WebHost.HttpControllerHandler.ProcessRequestAsyncCore(System.Web.HttpContextBase)
+0000001b9febdf30 00007fff3e9b1f23 System.Web.TaskAsyncHelper.BeginTask(System.Func`1<System.Threading.Tasks.Task>, System.AsyncCallback, System.Object)
+0000001b9febdf80 00007fff3e2a04cc System.Web.HttpApplication+CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+0000001b9febe000 00007fff3e970973 System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep)
+0000001b9febe040 00007fff3e2650b0 System.Web.HttpApplication.ExecuteStep(IExecutionStep, Boolean ByRef)
+0000001b9febe090 00007fff3e278114 System.Web.HttpApplication+PipelineStepManager.ResumeSteps(System.Exception)
+0000001b9febe1d0 00007fff3e265b49 System.Web.HttpApplication.BeginProcessRequestNotification(System.Web.HttpContext, System.AsyncCallback)
+0000001b9febe220 00007fff3e2766ba System.Web.HttpRuntime.ProcessRequestNotificationPrivate(System.Web.Hosting.IIS7WorkerRequest, System.Web.HttpContext)
+0000001b9febe2a0 00007fff3e266ccf System.Web.Hosting.PipelineRuntime.ProcessRequestNotificationHelper(IntPtr, IntPtr, IntPtr, Int32)
+0000001b9febe440 00007fff3e2668c3 System.Web.Hosting.PipelineRuntime.ProcessRequestNotification(IntPtr, IntPtr, IntPtr, Int32)
+0000001b9febe480 00007fff3e964502 DomainNeutralILStubClass.IL_STUB_ReversePInvoke(Int64, Int64, Int64, Int32)
+0000001b9febef70 00007fff534e222e [InlinedCallFrame: 0000001b9febef70] System.Web.Hosting.UnsafeIISMethods.MgdIndicateCompletion(IntPtr, System.Web.RequestNotificationStatus ByRef)
+0000001b9febef70 00007fff3e2cdeee [InlinedCallFrame: 0000001b9febef70] System.Web.Hosting.UnsafeIISMethods.MgdIndicateCompletion(IntPtr, System.Web.RequestNotificationStatus ByRef)
+0000001b9febef40 00007fff3e2cdeee DomainNeutralILStubClass.IL_STUB_PInvoke(IntPtr, System.Web.RequestNotificationStatus ByRef)
+0000001b9febf000 00007fff3e266ea0 System.Web.Hosting.PipelineRuntime.ProcessRequestNotificationHelper(IntPtr, IntPtr, IntPtr, Int32)
+0000001b9febf1a0 00007fff3e2668c3 System.Web.Hosting.PipelineRuntime.ProcessRequestNotification(IntPtr, IntPtr, IntPtr, Int32)
+0000001b9febf1e0 00007fff3e964502 DomainNeutralILStubClass.IL_STUB_ReversePInvoke(Int64, Int64, Int64, Int32)
+0000001b9febf3b8 00007fff534e2483 [ContextTransitionFrame: 0000001b9febf3b8] 
