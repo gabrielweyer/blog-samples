@@ -172,7 +172,7 @@ We get the managed stacktrace of one the thread serving the requests.
 
 ## Tools used during the presentation
 
-- [ConEmu][conemu] - Windows console emulator with tabs
+- [Cmder][cmder] - Portable console emulator for Windows
 - [Windows Magnifier][windows-magnifier]
 - [Open Broadcaster Software][obs] - free and open source software for video recording and live streaming
 
@@ -184,7 +184,7 @@ We get the managed stacktrace of one the thread serving the requests.
 [process-explorer]: https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
 [windbg]: https://github.com/gabrielweyer/nuggets/blob/master/windbg/README.md#download-and-install-windbg
 [sympath]: https://github.com/gabrielweyer/nuggets/blob/master/windbg/README.md#configure-the-symbols
-[conemu]: https://conemu.github.io/
+[cmder]: http://cmder.net/
 [windows-magnifier]: https://support.microsoft.com/en-au/help/11542/windows-use-magnifier
 [mex]: https://www.microsoft.com/en-us/download/details.aspx?id=53304
 [crash-pdb]: https://gabrielweyer.blob.core.windows.net/blob-samples/windbg-brownbag-1/crash/CrashConsole.pdb
