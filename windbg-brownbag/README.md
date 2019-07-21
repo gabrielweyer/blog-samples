@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Visual Studio 2017][vs-2017] or [Rider][rider]
+- [Visual Studio 2019][vs-2019] or [Rider][rider]
 - [Sysinternals][sysinternals]:
   - [ProcDump][procdump]
   - [Process Explorer][process-explorer]
@@ -176,14 +176,14 @@ We get the managed stacktrace of one the thread serving the requests.
 - [Windows Magnifier][windows-magnifier]
 - [Open Broadcaster Software][obs] - free and open source software for video recording and live streaming
 
-[vs-2017]: https://www.visualstudio.com/downloads/
+[vs-2019]: https://www.visualstudio.com/downloads/
 [rider]: https://www.jetbrains.com/rider/
 [windbg-slides]: docs/WinDbg.pptx
 [sysinternals]: https://docs.microsoft.com/en-us/sysinternals/
 [procdump]: https://docs.microsoft.com/en-us/sysinternals/downloads/procdump
 [process-explorer]: https://docs.microsoft.com/en-us/sysinternals/downloads/process-explorer
-[windbg]: https://github.com/gabrielweyer/nuggets/blob/master/windbg/README.md#download-and-install-windbg
-[sympath]: https://github.com/gabrielweyer/nuggets/blob/master/windbg/README.md#configure-the-symbols
+[windbg]: https://github.com/gabrielweyer/nuggets/blob/master/docs/windbg/README.md#download-and-install-windbg
+[sympath]: https://github.com/gabrielweyer/nuggets/blob/master/docs/windbg/README.md#configure-the-symbols
 [cmder]: http://cmder.net/
 [windows-magnifier]: https://support.microsoft.com/en-au/help/11542/windows-use-magnifier
 [mex]: https://www.microsoft.com/en-us/download/details.aspx?id=53304
